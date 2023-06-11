@@ -32,18 +32,26 @@ export class App extends Component {
     this.reset();
   };
 
-  handleFilterAbonent = () => {};
+  handleFilterAbonent = () => {
+    const { filter, contacts } = this.state;
+    return contacts.filter(({ name }) => {
+      const abonentName = name.toLowerCase();
+      const abonentFilter = filter.toLowerCase();
+      return abonentName.includes(abonentFilter);
+    });
+  };
 
   reset = () => {
     this.setState({ name: '', number: '', filter: '' });
   };
 
   render() {
-    const { name, number, contacts } = this.state;
+    const { name, number, filter, contacts } = this.state;
+
     return (
       <>
         <h1>Phone book</h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           Abonent name.
           <input
             type="text"
@@ -66,22 +74,28 @@ export class App extends Component {
             onChange={this.handleChange}
             required
           />
-          <button type="submit" onClick={this.handleSubmit}>
-            Add contact
-          </button>
+          <button type="submit">Add contact</button>
+          </form>
           <h2>Contacts</h2>
           Find contacts by name
-          <input></input>
+          <input
+            type="text"
+            name="filter"
+            title="To find abonent enter they name"
+            value={filter}
+            onChange={this.handleChange}
+          ></input>
           <ul>
-            {contacts.map(({ id, name, number }) => {
-              return (
-                <li key={id}>
-                  Abonent name: {name} || Abonent number: {number}
-                </li>
-              );
-            })}
+            {(filter ? this.handleFilterAbonent() : contacts).map(
+              ({ id, name, number }) => {
+                return (
+                  <li key={id}>
+                    Abonent name: {name} || Abonent number: {number}
+                  </li>
+                );
+              }
+            )}
           </ul>
-        </form>
       </>
     );
   }
