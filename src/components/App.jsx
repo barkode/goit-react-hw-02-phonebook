@@ -3,17 +3,15 @@ import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [{ id: '123', name: 'joan' }],
     name: '',
   };
 
-  handleChange = e => {
-    this.setState({ name: e.target.value });
-  };
+  handleFilterChange = () => {};
 
-  handleSubmit = e => {
-    e.prevantDefault();
-  };
+  handleAddContact = newContact => {};
+
+  handleDeleteContact = () => {};
 
   render() {
     const { name } = this.state;
@@ -32,7 +30,9 @@ export class App extends Component {
             onChange={this.handleChange}
             required
           />
-          <button type="submit">Add contact</button>
+          <button type="submit" onSubmit={this.handleSubmit}>
+            Add contact
+          </button>
         </form>
       </>
     );
