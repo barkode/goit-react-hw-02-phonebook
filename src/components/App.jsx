@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { number } from 'prop-types';
+import ContactForm from './ContactoForm/ContactForm';
 
 export class App extends Component {
   state = {
@@ -15,8 +15,6 @@ export class App extends Component {
       { id: 'id-8', name: 'Samuel El Jackson', number: '287-04-26' },
       { id: 'id-9', name: 'Annie Milligan', number: '154-44-28' },
     ],
-    name: '',
-    number: '',
     filter: '',
   };
 
@@ -51,51 +49,27 @@ export class App extends Component {
     return (
       <>
         <h1>Phone book</h1>
-        <form onSubmit={this.handleSubmit}>
-          Abonent name.
-          <input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            placeholder="Enter abonent name"
-            value={name}
-            onChange={this.handleChange}
-            required
-          />
-          Abonent phone number
-          <input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            placeholder="Enter phone number"
-            value={number}
-            onChange={this.handleChange}
-            required
-          />
-          <button type="submit">Add contact</button>
-          </form>
-          <h2>Contacts</h2>
-          Find contacts by name
-          <input
-            type="text"
-            name="filter"
-            title="To find abonent enter they name"
-            value={filter}
-            onChange={this.handleChange}
-          ></input>
-          <ul>
-            {(filter ? this.handleFilterAbonent() : contacts).map(
-              ({ id, name, number }) => {
-                return (
-                  <li key={id}>
-                    Abonent name: {name} || Abonent number: {number}
-                  </li>
-                );
-              }
-            )}
-          </ul>
+        <ContactForm />
+        <h2>Contacts</h2>
+        Find contacts by name
+        <input
+          type="text"
+          name="filter"
+          title="To find abonent enter they name"
+          value={filter}
+          onChange={this.handleChange}
+        ></input>
+        <ul>
+          {(filter ? this.handleFilterAbonent() : contacts).map(
+            ({ id, name, number }) => {
+              return (
+                <li key={id}>
+                  Abonent name: {name} || Abonent number: {number}
+                </li>
+              );
+            }
+          )}
+        </ul>
       </>
     );
   }
