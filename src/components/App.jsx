@@ -26,6 +26,14 @@ export class App extends Component {
 
   handleAddContact = newContact => {
     const { contacts } = this.state;
+    const arrayOfNames = contacts.map(contact => contact.name.toLowerCase());
+    const ifAbonentExist = arrayOfNames.find(
+      name => newContact.name.toLowerCase() === name
+    );
+    if (ifAbonentExist) {
+      alert(`${newContact.name} is already in contacts`);
+      return;
+    }
     contacts.push({ ...newContact });
     this.setState({ filter: '' });
   };
