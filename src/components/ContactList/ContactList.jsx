@@ -1,19 +1,25 @@
+import { Component } from 'react';
 import PropType from 'prop-types';
 
-const ContactList = contacts => {
-  return (
-    <ul>
-      {contacts.contacts.map(({ id, name, number }) => {
-        return (
-          <li key={id}>
-            Abonent name: {name} || Abonent number: {number}
-            <button type="button">Delete</button>
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
+class ContactList extends Component {
+  render() {
+    const { contacts, handleDeleteContact } = this.props;
+    return (
+      <ul>
+        {contacts.map(({ id, name, number }) => {
+          return (
+            <li key={id}>
+              Abonent name: {name} || Abonent number: {number}
+              <button type="button" onClick={() => handleDeleteContact(id)}>
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+}
 
 export default ContactList;
 
@@ -25,5 +31,5 @@ ContactList.propTypes = {
       number: PropType.string.isRequired,
     })
   ),
-  // onDeleteContact: PropType.func.isRequired,
+  handleDeleteContact: PropType.func.isRequired,
 };
