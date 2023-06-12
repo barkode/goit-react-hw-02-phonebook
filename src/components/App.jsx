@@ -3,6 +3,7 @@ import PropType from 'prop-types';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
+import css from './App.module.css';
 
 export class App extends Component {
   state = {
@@ -59,7 +60,7 @@ export class App extends Component {
     const { filter, contacts } = this.state;
     const filteredContacts = this.handleFilterAbonent();
     return (
-      <>
+      <div className={css.container}>
         <h1>Phone book</h1>
         <ContactForm onAddContact={this.handleAddContact} />
         <h2>Contacts</h2>
@@ -68,7 +69,7 @@ export class App extends Component {
           contacts={filter ? filteredContacts : contacts}
           handleDeleteContact={this.handleDeleteContact}
         />
-      </>
+      </div>
     );
   }
 }

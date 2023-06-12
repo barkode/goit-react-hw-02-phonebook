@@ -1,8 +1,9 @@
 import PropType from 'prop-types';
+import css from './Filter.module.css';
 
 const Filter = ({ filter, onFilterChange }) => {
   return (
-    <div>
+    <div className={css.label}>
       <p>Find abonent by Name</p>
       <input
         type="text"
@@ -11,6 +12,7 @@ const Filter = ({ filter, onFilterChange }) => {
         placeholder="Searching ....."
         value={filter}
         onChange={onFilterChange}
+        className={css.input}
       ></input>
     </div>
   );
