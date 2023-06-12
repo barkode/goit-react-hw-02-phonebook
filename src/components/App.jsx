@@ -41,15 +41,14 @@ export class App extends Component {
 
   render() {
     const { filter, contacts } = this.state;
+    const filteredContacts = this.handleFilterAbonent();
     return (
       <>
         <h1>Phone book</h1>
         <ContactForm onAddContact={this.handleAddContact} />
         <h2>Contacts</h2>
         <Filter filter={filter} onFilterChange={this.handleFilterChange} />
-        <ContactList
-          contacts={filter ? this.handleFilterAbonent() : contacts}
-        />
+        <ContactList contacts={filter ? filteredContacts : contacts} />
       </>
     );
   }
