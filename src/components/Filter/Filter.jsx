@@ -2,8 +2,8 @@ import PropType from 'prop-types';
 
 const Filter = ({ filter, onFilterChange }) => {
   return (
-    <>
-      <h3>Find abonent by Name</h3>
+    <div>
+      <p>Find abonent by Name</p>
       <input
         type="text"
         name="filter"
@@ -12,7 +12,7 @@ const Filter = ({ filter, onFilterChange }) => {
         value={filter}
         onChange={onFilterChange}
       ></input>
-    </>
+    </div>
   );
 };
 

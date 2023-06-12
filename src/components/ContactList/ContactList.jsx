@@ -10,7 +10,10 @@ class ContactList extends Component {
           return (
             <li key={id}>
               Abonent name: {name} || Abonent number: {number}
-              <button type="button" onClick={() => handleDeleteContact(id)}>
+              <button
+                type="button className={css.iconDelete}"
+                onClick={() => handleDeleteContact(id)}
+              >
                 Delete
               </button>
             </li>

@@ -33,7 +33,7 @@ class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        Abonent name.
+        <p>Abonent name</p>
         <input
           type="text"
           name="name"
@@ -44,7 +44,7 @@ class ContactForm extends Component {
           onChange={this.handleChange}
           required
         />
-        Abonent phone number
+        <p>Abonent phone number</p>
         <input
           type="tel"
           name="number"
@@ -55,7 +55,9 @@ class ContactForm extends Component {
           onChange={this.handleChange}
           required
         />
-        <button type="submit">Add contact</button>
+        <p>
+          <button type="submit">Add contact</button>
+        </p>
       </form>
     );
   }
