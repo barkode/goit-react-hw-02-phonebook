@@ -1,6 +1,8 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
+import PropType from 'prop-types';
 import ContactForm from './ContactoForm/ContactForm';
+import Filter from './Filter/Filter';
+import ContactList from './ContactList/ContactList';
 
 export class App extends Component {
   state = {
@@ -18,16 +20,14 @@ export class App extends Component {
     filter: '',
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+  handleFilterChange = e => {
+    this.setState({ filter: e.target.value });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const { contacts, name, number } = this.state;
-    contacts.push({ id: nanoid(), name, number });
-    this.reset();
+  handleAddContact = newContact => {
+    const { contacts } = this.state;
+    contacts.push({ ...newContact });
+    this.setState({ filter: '' });
   };
 
   handleFilterAbonent = () => {
@@ -39,38 +39,28 @@ export class App extends Component {
     });
   };
 
-  reset = () => {
-    this.setState({ name: '', number: '', filter: '' });
-  };
-
   render() {
-    const { name, number, filter, contacts } = this.state;
-
+    const { filter, contacts } = this.state;
     return (
       <>
         <h1>Phone book</h1>
-        <ContactForm />
+        <ContactForm onAddContact={this.handleAddContact} />
         <h2>Contacts</h2>
-        Find contacts by name
-        <input
-          type="text"
-          name="filter"
-          title="To find abonent enter they name"
-          value={filter}
-          onChange={this.handleChange}
-        ></input>
-        <ul>
-          {(filter ? this.handleFilterAbonent() : contacts).map(
-            ({ id, name, number }) => {
-              return (
-                <li key={id}>
-                  Abonent name: {name} || Abonent number: {number}
-                </li>
-              );
-            }
-          )}
-        </ul>
+        <Filter filter={filter} onFilterChange={this.handleFilterChange} />
+        <ContactList
+          contacts={filter ? this.handleFilterAbonent() : contacts}
+        />
       </>
     );
   }
 }
+
+App.propTypes = {
+  contacts: PropType.arrayOf(
+    PropType.shape({
+      id: PropType.string.isRequired,
+      name: PropType.string.isRequired,
+      number: PropType.string.isRequired,
+    })
+  ),
+};
