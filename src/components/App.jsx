@@ -34,8 +34,10 @@ export class App extends Component {
       alert(`${newContact.name} is already in contacts`);
       return;
     }
-    contacts.push({ ...newContact });
-    this.setState({ filter: '' });
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+      filter: '',
+    }));
   };
 
   handleFilterAbonent = () => {
