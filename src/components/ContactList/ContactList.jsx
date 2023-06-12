@@ -1,7 +1,6 @@
 import PropType from 'prop-types';
 
 const ContactList = contacts => {
-  console.log(contacts);
   return (
     <ul>
       {contacts.contacts.map(({ id, name, number }) => {
